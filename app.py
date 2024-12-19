@@ -17,6 +17,29 @@ from reportlab.platypus import (Table, TableStyle, Paragraph, Image, Spacer, Sim
 from reportlab.lib import styles, enums, colors, pagesizes
 
 # Function Definitions
+def save_lda_checkpoint(lda_model, dictionary, checkpoint_dir="Model", checkpoint_name="lda_checkpoint"):
+    """Saves the LDA model and dictionary as a checkpoint."""
+    os.makedirs(checkpoint_dir, exist_ok=True)
+    model_path = os.path.join(checkpoint_dir, f"{checkpoint_name}.model")
+    dict_path = os.path.join(checkpoint_dir, f"{checkpoint_name}.dict")
+    
+    lda_model.save(model_path)
+    dictionary.save(dict_path)
+    print(f"Checkpoint Saved: {model_path}, {dict_path}")
+
+def load_lda_checkpoint(checkpoint_dir="Model", checkpoint_name="lda_checkpoint"):
+    """Loads the LDA model and dictionary from a checkpoint."""
+    model_path = os.path.join(checkpoint_dir, f"{checkpoint_name}.model")
+    dict_path = os.path.join(checkpoint_dir, f"{checkpoint_name}.dict")
+    
+    if not os.path.exists(model_path) or not os.path.exists(dict_path):
+        raise FileNotFoundError("Checkpoint Files Not Found!")
+    
+    lda_model = LdaModel.load(model_path)
+    dictionary = corpora.Dictionary.load(dict_path)
+    print(f"Checkpoint Loaded: {model_path}, {dict_path}")
+    return lda_model, dictionary
+
 def process_json_to_txt(file_content):
     """Converts a JSON chat file into text format."""
     try:
@@ -188,6 +211,40 @@ def generate_pdf_report(keywords_chart_path, trends_chart_path, top_messages):
     doc.build(elements)
     return pdf_path
 
+# Generate Summary with LDA Checkpointing
+def generate_summary(chat_df, top_n_keywords=10, top_n_messages=5, num_topics=3):
+    """
+    Generates a summary of the chat with LDA checkpointing.
+    """
+    # Extract Keywords
+    vectorizer = TfidfVectorizer(max_features=top_n_keywords)
+    tfidf_matrix = vectorizer.fit_transform(chat_df['Cleaned_Message'])
+    keywords_dict = dict(zip(vectorizer.get_feature_names_out(), tfidf_matrix.sum(axis=0).tolist()[0]))
+    
+    # Summarize Messages
+    chat_df['Message_Length'] = chat_df['Message'].str.len()
+    summary = chat_df.sort_values(by='Message_Length', ascending=False).head(top_n_messages)
+    
+    # Extract Topics
+    tokenizer = re.compile(r'\w+')
+    texts = [tokenizer.findall(msg.lower()) for msg in chat_df['Cleaned_Message']]
+    dictionary = corpora.Dictionary(texts)
+    corpus = [dictionary.doc2bow(text) for text in texts]
+
+    # Load or Train LDA Model
+    try:
+        lda_model, loaded_dictionary = load_lda_checkpoint()
+        if loaded_dictionary.token2id != dictionary.token2id:
+            print("Dictionary Mismatch; Retraining LDA Model.")
+            lda_model = LdaModel(corpus=corpus, num_topics=num_topics, id2word=dictionary, passes=10)
+            save_lda_checkpoint(lda_model, dictionary)
+    except FileNotFoundError:
+        lda_model = LdaModel(corpus=corpus, num_topics=num_topics, id2word=dictionary, passes=10)
+        save_lda_checkpoint(lda_model, dictionary)
+    
+    topics = lda_model.print_topics(num_words=5)
+    return keywords_dict, summary, topics
+
 # Streamlit App Structure
 st.title("Chat Analyzer")
 st.sidebar.header("Upload Chat")
@@ -195,6 +252,7 @@ st.sidebar.header("Upload Chat")
 uploaded_file = st.sidebar.file_uploader("Upload A Chat File", type=["txt", "json"])
 
 if uploaded_file:
+    # Process and Parse Chat
     if uploaded_file.name.endswith(".json"):
         processed_text = process_json_to_txt(uploaded_file.read())
         if processed_text:
@@ -210,16 +268,17 @@ if uploaded_file:
         chat_df = preprocess_chat(chat_df)
         st.success("Chat Data Successfully Preprocessed!")
 
-    # Determine date and time ranges
+    # Date and Time Ranges
     chat_df['Datetime'] = pd.to_datetime(chat_df['Date'] + " " + chat_df['Time'], format='%d/%m/%Y %I:%M %p')
     earliest_date, latest_date = chat_df['Datetime'].dt.date.min(), chat_df['Datetime'].dt.date.max()
-    earliest_time, latest_time = chat_df['Datetime'].dt.time.min(), chat_df['Datetime'].dt.time.max()
     current_date, current_time = datetime.now(pytz.timezone("Asia/Dubai")).date(), datetime.now(pytz.timezone("Asia/Dubai")).time()
 
-    # Sidebar filters and parameters
+    # Sidebar Filters and Parameters
     st.sidebar.header("Filters")
     start_date = st.sidebar.date_input("Start Date", value=earliest_date, min_value=earliest_date, max_value=current_date)
     end_date = st.sidebar.date_input("End Date", value=current_date, min_value=earliest_date, max_value=current_date)
+    earliest_time = chat_df['Datetime'].dt.time.min()
+    latest_time = chat_df['Datetime'].dt.time.max()
     start_time = st.sidebar.time_input("Start Time", value=earliest_time)
     end_time = st.sidebar.time_input("End Time", value=latest_time)
     keywords = st.sidebar.text_input("Keywords [Comma-Separated]").split(",")
@@ -253,14 +312,14 @@ if uploaded_file:
         with st.spinner("Generating PDF Report..."):
             os.makedirs("Report", exist_ok=True)
 
-            # Save trends chart
+            # Save Trends Chart
             trends_chart_path = "Report/message_trends_plot.png"
 
-            # Ensure keywords_dict is available
+            # Ensure Keywords Chart is Available
             if 'keywords_dict' not in locals():
                 keywords_dict, summary, topics = generate_summary(filtered_chat, top_n_keywords, top_n_messages, num_topics)
 
-            # Save keywords chart
+            # Save Keywords Chart
             keywords_chart_path = "Report/top_keywords.png"
             sns.barplot(x=list(keywords_dict.values()), y=list(keywords_dict.keys()), palette="YlGnBu")
             plt.title("Top Keywords")
@@ -274,4 +333,4 @@ if uploaded_file:
             st.success("PDF Report Successfully Generated!")
             # Provide Download Option
             with open(pdf_path, "rb") as pdf_file:
-                st.download_button("Download Report", pdf_file, file_name="Chat_Analysis_Report.pdf", mime="application/pdf")
+                st.download_button("Download Report", pdf_file, file_name="Chat Report.pdf", mime="application/pdf")
