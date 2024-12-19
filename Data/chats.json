@@ -1,0 +1,412 @@
+{
+ "name": "Mary ",
+ "type": "personal_chat",
+ "id": 865118586,
+ "messages": [
+  {
+    "id": 3029,
+    "type": "message",
+    "date": "2024-09-10T14:30:00",
+    "date_unixtime": "1663004800",
+    "from": "John",
+    "from_id": "user1261330051",
+    "text": "Hey everyone, 😊 what's up?",
+    "text_entities": [
+      {
+      "type": "plain",
+      "text": "Hey everyone,"
+      },
+      {
+      "type": "emoji",
+      "text": "😊"
+      }
+    ]
+  },
+  {
+    "id": 3030,
+    "type": "message",
+    "date": "2024-09-10T14:30:15",
+    "date_unixtime": "1663004865",
+    "from": "Mary ",
+    "from_id": "user1261330052",
+    "text": "Not much, just got back from a hike. 💛 How about you?",
+    "text_entities": [
+      {
+      "type": "plain",
+      "text": "Not much, just got back from a hike."
+      },
+      {
+      "type": "emoji",
+      "text": "💛"
+      }
+    ]
+  },
+  {
+    "id": 3031,
+    "type": "message",
+    "date": "2024-09-10T14:30:28",
+    "date_unixtime": "1663004908",
+    "from": "John",
+    "from_id": "user1261330051",
+    "text": "@Mary  that sounds amazing! I need to get out more often. 🤗 What did you see?",
+    "text_entities": [
+      {
+      "type": "plain",
+      "text": "@Mary "
+      },
+      {
+      "type": "at_mention",
+      "text": ""
+      },
+      {
+      "type": "emoji",
+      "text": "🤗"
+      }
+    ]
+  },
+  {
+    "id": 3032,
+    "type": "message",
+    "date": "2024-09-10T14:30:42",
+    "date_unixtime": "1663004942",
+    "from": "Mary ",
+    "from_id": "user1261330052",
+    "text": "@John yeah, it was incredible! I saw a beautiful waterfall and some wildlife. 🌳🦊 What about you?",
+    "text_entities": [
+      {
+      "type": "plain",
+      "text": "@John"
+      },
+      {
+      "type": "at_mention",
+      "text": ""
+      },
+      {
+      "type": "emoji",
+      "text": "🌳"
+      },
+      {
+      "type": "emoji",
+      "text": "🦊"
+      }
+    ]
+  },
+  {
+    "id": 3033,
+    "type": "message",
+    "date": "2024-09-10T14:31:00",
+    "date_unixtime": "1663005400",
+    "from": "John",
+    "from_id": "user1261330051",
+    "text": "That sounds amazing! I've been stuck in the office all week. 😓 I need a break from code and just relax.",
+    "text_entities": [
+      {
+      "type": "plain",
+      "text": "That sounds amazing!"
+      },
+      {
+      "type": "emoji",
+      "text": "😓"
+      }
+    ]
+  },
+  {
+    "id": 3034,
+    "type": "message",
+    "date": "2024-09-10T14:31:15",
+    "date_unixtime": "1663005465",
+    "from": "Mary ",
+    "from_id": "user1261330052",
+    "text": "@John yeah, I know the feeling! But sometimes a change of scenery can be really refreshing. 🌞 Did you finish that project we were working on?",
+    "text_entities": [
+      {
+      "type": "plain",
+      "text": "@John"
+      },
+      {
+      "type": "at_mention",
+      "text": ""
+      },
+      {
+      "type": "emoji",
+      "text": "🌞"
+      }
+    ]
+  },
+  {
+    "id": 3035,
+    "type": "message",
+    "date": "2024-09-10T14:31:30",
+    "date_unixtime": "1663005520",
+    "from": "John",
+    "from_id": "user1261330051",
+    "text": "@Mary  yeah, I finished it yesterday. 🎉 It was a bit of a challenge, but it was worth it in the end.",
+    "text_entities": [
+      {
+      "type": "plain",
+      "text": "@Mary "
+      },
+      {
+      "type": "at_mention",
+      "text": ""
+      },
+      {
+      "type": "emoji",
+      "text": "🎉"
+      }
+    ]
+  },
+  {
+    "id": 3036,
+    "type": "message",
+    "date": "2024-09-10T14:31:45",
+    "date_unixtime": "1663005585",
+    "from": "Mary ",
+    "from_id": "user1261330052",
+    "text": "That's great to hear! 😊 I'm sure it'll be a big help for your next project. By the way, have you tried that new coffee shop downtown?",
+    "text_entities": [
+      {
+      "type": "plain",
+      "text": "That's great to hear!"
+      },
+      {
+      "type": "emoji",
+      "text": "😊"
+      }
+    ]
+  },
+  {
+    "id": 3037,
+    "type": "message",
+    "date": "2024-09-10T14:32:00",
+    "date_unixtime": "1663005640",
+    "from": "John",
+    "from_id": "user1261330051",
+    "text": "@Mary  yeah, I have! 🍵 It's really good. The owner is a friend of mine and he hooks me up with free coffee every time.",
+    "text_entities": [
+      {
+      "type": "plain",
+      "text": "@Mary "
+      },
+      {
+      "type": "at_mention",
+      "text": ""
+      },
+      {
+      "type": "emoji",
+      "text": "🍵"
+      }
+    ]
+  },
+  {
+    "id": 3038,
+    "type": "message",
+    "date": "2024-09-10T14:32:15",
+    "date_unixtime": "1663005700",
+    "from": "Mary ",
+    "from_id": "user1261330052",
+    "text": "That's awesome! 😊 I'll have to check it out next time I'm downtown. Thanks for the recommendation!",
+    "text_entities": [
+      {
+      "type": "plain",
+      "text": "That's awesome!"
+      },
+      {
+      "type": "emoji",
+      "text": "😊"
+      }
+    ]
+  },
+  {
+    "id": 3039,
+    "type": "message",
+    "date": "2024-09-10T14:32:30",
+    "date_unixtime": "1663005760",
+    "from": "John",
+    "from_id": "user1261330051",
+    "text": "No problem at all! 😊 I'll let you know if I come across any other good spots.",
+    "text_entities": [
+      {
+      "type": "plain",
+      "text": "No problem at all!"
+      },
+      {
+      "type": "emoji",
+      "text": "😊"
+      }
+    ]
+  },
+  {
+   "id": 3029,
+   "type": "message",
+   "date": "2024-09-10T14:30:00",
+   "date_unixtime": "1663004800",
+   "from": "John",
+   "from_id": "user1261330051",
+   "text": "Hey everyone, 😊 what's up?",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "Hey everyone,"
+    },
+    {
+     "type": "emoji",
+     "text": "😊"
+    }
+   ]
+  },
+  {
+   "id": 3030,
+   "type": "message",
+   "date": "2024-09-10T14:30:15",
+   "date_unixtime": "1663004865",
+   "from": "Mary ",
+   "from_id": "user1261330052",
+   "text": "Not much, just got back from a hike. 💛 How about you?",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "Not much, just got back from a hike."
+    },
+    {
+     "type": "emoji",
+     "text": "💛"
+    }
+   ]
+  },
+  {
+   "id": 3031,
+   "type": "message",
+   "date": "2024-09-10T14:30:28",
+   "date_unixtime": "1663004908",
+   "from": "John",
+   "from_id": "user1261330051",
+   "text": "@Mary  that sounds amazing! I need to get out more often. 🤗 What did you see?",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "@Mary "
+    },
+    {
+     "type": "at_mention",
+     "text": ""
+    },
+    {
+     "type": "emoji",
+     "text": "🤗"
+    }
+   ]
+  },
+  {
+   "id": 3032,
+   "type": "message",
+   "date": "2024-09-10T14:30:40",
+   "date_unixtime": "1663004930",
+   "from": "Sarah",
+   "from_id": "user1261330053",
+   "text": "I'm so jealous! I've been stuck inside all week. 🤣 Can you send me some pics?",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "I'm so jealous!"
+    },
+    {
+     "type": "emoji",
+     "text": "🤣"
+    }
+   ]
+  },
+  {
+   "id": 3033,
+   "type": "message",
+   "date": "2024-09-10T14:31:02",
+   "date_unixtime": "1663005022",
+   "from": "John",
+   "from_id": "user1261330051",
+   "text": "@Sarah I'll send you some pics, but only if you promise to try the new coffee shop downtown. ☕️",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "@Sarah"
+    },
+    {
+     "type": "at_mention",
+     "text": ""
+    },
+    {
+     "type": "emoji",
+     "text": "☕️"
+    }
+   ]
+  },
+  {
+   "id": 3034,
+   "type": "message",
+   "date": "2024-09-10T14:31:15",
+   "date_unixtime": "1663005085",
+   "from": "Mary ",
+   "from_id": "user1261330052",
+   "text": "Deal! But only if you try the avocado toast. 🤪 I'm obsessed with it.",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "Deal!"
+    },
+    {
+     "type": "emoji",
+     "text": "🤪"
+    }
+   ]
+  },
+  {
+   "id": 3035,
+   "type": "message",
+   "date": "2024-09-10T14:31:30",
+   "date_unixtime": "1663005140",
+   "from": "Sarah",
+   "from_id": "user1261330053",
+   "text": "I'm sold! But only if you take me to the park afterwards. 🌳 I need some fresh air.",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "I'm sold!"
+    },
+    {
+     "type": "emoji",
+     "text": "🌳"
+    }
+   ]
+  },
+  {
+   "id": 3036,
+   "type": "message",
+   "date": "2024-09-10T14:31:45",
+   "date_unixtime": "1663005205",
+   "from": "John",
+   "from_id": "user1261330051",
+   "text": "@Sarah @Mary  I'll make it happen. Let's plan for Saturday.",
+   "text_entities": [
+    {
+     "type": "plain",
+     "text": "@Sarah"
+    },
+    {
+     "type": "at_mention",
+     "text": ""
+    },
+    {
+     "type": "plain",
+     "text": "@Mary "
+    },
+    {
+     "type": "at_mention",
+     "text": ""
+    },
+    {
+     "type": "plain",
+     "text": "I'll make it happen. Let's plan for Saturday."
+    }
+   ]
+  }
+ ]
+}
