@@ -79,18 +79,16 @@ CHAT SUMMARIZER/
 #### Export Chat to TXT File
 1. Open your WhatsApp.
 2. Export your chats to a text file.
-3. With the sidebar, upload your exported chat file.
-4. Use the filters on the sidebar to get more insights.
 
 ### Telegram Chat Export
 
 #### Export Chat to JSON File
-1. Open your WhatsApp.
-2. Export your chats to a text file.
-3. With the sidebar, upload your exported chat file.
-4. Use the filters on the sidebar to get more insights.
+1. Open your Telegram.
+2. Export your chats to a json file.
 
 ### Upload Chat File
+1. With the sidebar, upload your exported chat file.
+2. Use the filters on the sidebar to get more insights.
 
 #### Apply Filters
 - **Date and Time Filters**: Set start and end dates/times.
