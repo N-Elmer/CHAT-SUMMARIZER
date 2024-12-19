@@ -74,24 +74,36 @@ CHAT SUMMARIZER/
 
 ## How to Use
 
-### Upload Chat File
+### WhatsApp Chat Export
+
+#### Export Chat to TXT File
 1. Open your WhatsApp.
 2. Export your chats to a text file.
 3. With the sidebar, upload your exported chat file.
 4. Use the filters on the sidebar to get more insights.
 
-### Apply Filters
+### Telegram Chat Export
+
+#### Export Chat to JSON File
+1. Open your WhatsApp.
+2. Export your chats to a text file.
+3. With the sidebar, upload your exported chat file.
+4. Use the filters on the sidebar to get more insights.
+
+### Upload Chat File
+
+#### Apply Filters
 - **Date and Time Filters**: Set start and end dates/times.
 - **Keywords**: Enter comma-separated keywords to filter messages containing specific terms.
 
-### Generate Summary
+#### Generate Summary
 - Select the number of top keywords, topics, and messages to include in the analysis.
 - View visualizations, including:
   - **Message Trends**: A time-based line chart of message counts.
   - **Keyword Importance**: A bar chart of extracted keywords.
   - **Topic Distribution**: A pie chart of conversation topics.
 
-### Download Report
+#### Download Report
 - Click "Generate Report" to create a PDF file summarizing the analysis, including:
   - Top keywords chart.
   - Message trends chart.

@@ -17,28 +17,28 @@ from reportlab.platypus import (Table, TableStyle, Paragraph, Image, Spacer, Sim
 from reportlab.lib import styles, enums, colors, pagesizes
 
 # Function Definitions
-def process_json_to_txt(file_content):
-    """Converts a JSON chat file into text format."""
-    try:
-        data = json.loads(file_content.decode("utf-8"))
-    except json.JSONDecodeError:
-        st.error("The uploaded JSON file is not valid.")
-        return None
+# def process_json_to_txt(file_content):
+#     """Converts a JSON chat file into text format."""
+#     try:
+#         data = json.loads(file_content.decode("utf-8"))
+#     except json.JSONDecodeError:
+#         st.error("The uploaded JSON file is not valid.")
+#         return None
 
-    output_lines = []
-    for message in data.get("messages", []):
-        if message.get("type") == "message":
-            try:
-                dt = datetime.fromisoformat(message["date"])
-                date_formatted = dt.strftime('%d/%m/%Y, %I:%M %p').lower()
-                username = message.get("from", "Unknown")
-                content = message.get("text", "")
-                line = f"{date_formatted} - {username}: {content}"
-                output_lines.append(line)
-            except (ValueError, KeyError):
-                continue
+#     output_lines = []
+#     for message in data.get("messages", []):
+#         if message.get("type") == "message":
+#             try:
+#                 dt = datetime.fromisoformat(message["date"])
+#                 date_formatted = dt.strftime('%d/%m/%Y, %I:%M %p').lower()
+#                 username = message.get("from", "Unknown")
+#                 content = message.get("text", "")
+#                 line = f"{date_formatted} - {username}: {content}"
+#                 output_lines.append(line)
+#             except (ValueError, KeyError):
+#                 continue
 
-    return "\n".join(output_lines)
+#     return "\n".join(output_lines)
 
 def parse_chat(file_content):
     """Parses chat file content into a DataFrame."""

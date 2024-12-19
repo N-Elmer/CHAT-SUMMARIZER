@@ -1,5 +1,5 @@
 {
- "name": "Mary ",
+ "name": "Mary",
  "type": "personal_chat",
  "id": 865118586,
  "messages": [
@@ -27,7 +27,7 @@
     "type": "message",
     "date": "2024-09-10T14:30:15",
     "date_unixtime": "1663004865",
-    "from": "Mary ",
+    "from": "Mary",
     "from_id": "user1261330052",
     "text": "Not much, just got back from a hike. 💛 How about you?",
     "text_entities": [
@@ -48,11 +48,11 @@
     "date_unixtime": "1663004908",
     "from": "John",
     "from_id": "user1261330051",
-    "text": "@Mary  that sounds amazing! I need to get out more often. 🤗 What did you see?",
+    "text": "@Mary that sounds amazing! I need to get out more often. 🤗 What did you see?",
     "text_entities": [
       {
       "type": "plain",
-      "text": "@Mary "
+      "text": "@Mary"
       },
       {
       "type": "at_mention",
@@ -69,7 +69,7 @@
     "type": "message",
     "date": "2024-09-10T14:30:42",
     "date_unixtime": "1663004942",
-    "from": "Mary ",
+    "from": "Mary",
     "from_id": "user1261330052",
     "text": "@John yeah, it was incredible! I saw a beautiful waterfall and some wildlife. 🌳🦊 What about you?",
     "text_entities": [
@@ -115,7 +115,7 @@
     "type": "message",
     "date": "2024-09-10T14:31:15",
     "date_unixtime": "1663005465",
-    "from": "Mary ",
+    "from": "Mary",
     "from_id": "user1261330052",
     "text": "@John yeah, I know the feeling! But sometimes a change of scenery can be really refreshing. 🌞 Did you finish that project we were working on?",
     "text_entities": [
@@ -140,11 +140,11 @@
     "date_unixtime": "1663005520",
     "from": "John",
     "from_id": "user1261330051",
-    "text": "@Mary  yeah, I finished it yesterday. 🎉 It was a bit of a challenge, but it was worth it in the end.",
+    "text": "@Mary yeah, I finished it yesterday. 🎉 It was a bit of a challenge, but it was worth it in the end.",
     "text_entities": [
       {
       "type": "plain",
-      "text": "@Mary "
+      "text": "@Mary"
       },
       {
       "type": "at_mention",
@@ -161,7 +161,7 @@
     "type": "message",
     "date": "2024-09-10T14:31:45",
     "date_unixtime": "1663005585",
-    "from": "Mary ",
+    "from": "Mary",
     "from_id": "user1261330052",
     "text": "That's great to hear! 😊 I'm sure it'll be a big help for your next project. By the way, have you tried that new coffee shop downtown?",
     "text_entities": [
@@ -182,11 +182,11 @@
     "date_unixtime": "1663005640",
     "from": "John",
     "from_id": "user1261330051",
-    "text": "@Mary  yeah, I have! 🍵 It's really good. The owner is a friend of mine and he hooks me up with free coffee every time.",
+    "text": "@Mary yeah, I have! 🍵 It's really good. The owner is a friend of mine and he hooks me up with free coffee every time.",
     "text_entities": [
       {
       "type": "plain",
-      "text": "@Mary "
+      "text": "@Mary"
       },
       {
       "type": "at_mention",
@@ -203,7 +203,7 @@
     "type": "message",
     "date": "2024-09-10T14:32:15",
     "date_unixtime": "1663005700",
-    "from": "Mary ",
+    "from": "Mary",
     "from_id": "user1261330052",
     "text": "That's awesome! 😊 I'll have to check it out next time I'm downtown. Thanks for the recommendation!",
     "text_entities": [
@@ -260,7 +260,7 @@
    "type": "message",
    "date": "2024-09-10T14:30:15",
    "date_unixtime": "1663004865",
-   "from": "Mary ",
+   "from": "Mary",
    "from_id": "user1261330052",
    "text": "Not much, just got back from a hike. 💛 How about you?",
    "text_entities": [
@@ -281,11 +281,11 @@
    "date_unixtime": "1663004908",
    "from": "John",
    "from_id": "user1261330051",
-   "text": "@Mary  that sounds amazing! I need to get out more often. 🤗 What did you see?",
+   "text": "@Mary that sounds amazing! I need to get out more often. 🤗 What did you see?",
    "text_entities": [
     {
      "type": "plain",
-     "text": "@Mary "
+     "text": "@Mary"
     },
     {
      "type": "at_mention",
@@ -344,7 +344,7 @@
    "type": "message",
    "date": "2024-09-10T14:31:15",
    "date_unixtime": "1663005085",
-   "from": "Mary ",
+   "from": "Mary",
    "from_id": "user1261330052",
    "text": "Deal! But only if you try the avocado toast. 🤪 I'm obsessed with it.",
    "text_entities": [
@@ -384,7 +384,7 @@
    "date_unixtime": "1663005205",
    "from": "John",
    "from_id": "user1261330051",
-   "text": "@Sarah @Mary  I'll make it happen. Let's plan for Saturday.",
+   "text": "@Sarah @Mary I'll make it happen. Let's plan for Saturday.",
    "text_entities": [
     {
      "type": "plain",
@@ -396,7 +396,7 @@
     },
     {
      "type": "plain",
-     "text": "@Mary "
+     "text": "@Mary"
     },
     {
      "type": "at_mention",
