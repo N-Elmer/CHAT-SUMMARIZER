@@ -13,7 +13,7 @@ import seaborn as sns
 from gensim.models import LdaModel
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.platypus import (Table, TableStyle, Paragraph, Image, Spacer, SimpleDocTemplate)
+from reportlab.platypus import (Table, TableStyle, Paragraph, Image, Spacer, SimpleDocTemplate, NextPageTemplate, PageBreak)
 from reportlab.lib import styles, enums, colors, pagesizes
 
 # Function Definitions
@@ -171,44 +171,87 @@ def generate_pdf_report(keywords_chart_path, trends_chart_path, top_messages):
     """Generates a PDF report containing chat analysis results with keywords chart on first page and messages table on second page."""
     os.makedirs("Report", exist_ok=True)
     pdf_path = "Report/chat_analysis_report.pdf"
-    doc = SimpleDocTemplate(pdf_path, pagesize=letter)
+    
+    # Use a smaller page size to ensure content fits
+    doc = SimpleDocTemplate(
+        pdf_path,
+        pagesize=letter,
+        rightMargin=30,
+        leftMargin=30,
+        topMargin=30,
+        bottomMargin=30
+    )
+    
     styles = getSampleStyleSheet()
     elements = []
 
     # Add title
-    elements.append(Paragraph("Chat Analysis Report", styles['Title']))
-    elements.append(Spacer(1, 12))
+    title_style = styles['Title']
+    title_style.spaceAfter = 30
+    elements.append(Paragraph("Chat Analysis Report", title_style))
 
     # Add keywords chart on the first page
     if keywords_chart_path:
         elements.append(Paragraph("Top Keywords", styles['Heading2']))
-        elements.append(Image(keywords_chart_path, width=400, height=300))
-        elements.append(Spacer(1, 12))
+        img = Image(keywords_chart_path, width=400, height=300)
+        elements.append(img)
+        elements.append(Spacer(1, 20))
 
     # Force a page break
-    from reportlab.platypus import NextPageTemplate, PageBreak
     elements.append(PageBreak())
 
     # Add messages table on the second page
     elements.append(Paragraph("Message Summary", styles['Heading2']))
+    elements.append(Spacer(1, 20))
     
-    table_data = [["Sender", "Message"]] + [
-        [Paragraph(str(row["Sender"]), styles['BodyText']), Paragraph(str(row["Message"]), styles['BodyText'])]
-        for _, row in top_messages.iterrows()
-    ]
-    table = Table(table_data, colWidths=[150, 300])
+    # Create a custom style for table cells
+    table_style = styles["BodyText"].clone('TableCell', fontSize=8, leading=10)
+    
+    # Prepare table data with wrapped text
+    table_data = [["Sender", "Message"]]
+    for _, row in top_messages.iterrows():
+        # Limit message length and wrap text
+        sender = Paragraph(str(row["Sender"])[:50], table_style)
+        message = Paragraph(str(row["Message"])[:500], table_style)  # Limit message length
+        table_data.append([sender, message])
+    
+    # Create table with adjusted column widths
+    available_width = doc.width
+    col_widths = [available_width * 0.3, available_width * 0.7]  # 30% for sender, 70% for message
+    
+    table = Table(
+        table_data,
+        colWidths=col_widths,
+        repeatRows=1  # Repeat header row on each page
+    )
+    
+    # Apply table styles
     table.setStyle(TableStyle([
-        ("BACKGROUND", (0, 0), (-1, 0), colors.grey),
-        ("TEXTCOLOR", (0, 0), (-1, 0), colors.whitesmoke),
-        ("ALIGN", (0, 0), (-1, -1), "LEFT"),
-        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
-        ("BOTTOMPADDING", (0, 0), (-1, 0), 12),
-        ("BACKGROUND", (0, 1), (-1, -1), colors.beige),
-        ("GRID", (0, 0), (-1, -1), 1, colors.black),
+        ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('FONTSIZE', (0, 0), (-1, 0), 10),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+        ('TEXTCOLOR', (0, 1), (-1, -1), colors.black),
+        ('FONTSIZE', (0, 1), (-1, -1), 8),
+        ('GRID', (0, 0), (-1, -1), 1, colors.black),
+        ('ROWHEIGHT', (0, 0), (-1, -1), None),  # Let row height adjust automatically
+        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+        ('LEFTPADDING', (0, 0), (-1, -1), 6),
+        ('RIGHTPADDING', (0, 0), (-1, -1), 6),
     ]))
+    
     elements.append(table)
-
-    doc.build(elements)
+    
+    # Build the PDF
+    try:
+        doc.build(elements)
+    except Exception as e:
+        print(f"Error generating PDF: {str(e)}")
+        return None
+        
     return pdf_path
 
 # Generate Summary with LDA Checkpointing
@@ -284,8 +327,8 @@ if uploaded_file:
     keywords = st.sidebar.text_input("Keywords [Comma-Separated]").split(",")
 
     st.sidebar.header("Parameters")
-    top_n_keywords = st.sidebar.number_input("Top Keywords", min_value=1, max_value=50, value=10)
     num_topics = st.sidebar.number_input("Number of Topics", min_value=1, max_value=10, value=3)
+    top_n_keywords = st.sidebar.number_input("Top Keywords", min_value=1, max_value=50, value=10)
     top_n_messages = st.sidebar.number_input("Top Messages", min_value=1, max_value=50, value=5)
 
     filtered_chat = filter_by_criteria(chat_df, start_date, end_date, start_time, end_time, keywords)
