@@ -5,7 +5,7 @@
 #define MyAppVersion "1.4"
 #define MyAppPublisher "N-Elmer"
 #define MyAppURL "https://github.com/N-Elmer/CHAT-SUMMARIZER/"
-#define MyAppExeName "Chat Analyser.exe"
+#define MyAppExeName "CAv1.4Setup.exe"
 #define MyAppAssocName MyAppName + ""
 #define MyAppAssocExt ".exe"
 #define MyAppAssocKey StringChange(MyAppAssocName, " ", "") + MyAppAssocExt
@@ -13,7 +13,7 @@
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{48C96D7B-62B8-43F5-940B-DDE1E39F1C98}
+AppId={{275338B3-14EF-4EF3-9EE2-51FEED11F93C}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
@@ -34,12 +34,11 @@ ChangesAssociations=yes
 DisableProgramGroupPage=yes
 LicenseFile=C:\Users\Elmer\Documents\GitHub\CHAT-SUMMARIZER\Setup\LICENSE.txt
 InfoBeforeFile=C:\Users\Elmer\Documents\GitHub\CHAT-SUMMARIZER\Setup\README.txt
-InfoAfterFile=C:\Users\Elmer\Documents\GitHub\CHAT-SUMMARIZER\Setup\Debug.txt
+InfoAfterFile=C:\Users\Elmer\Documents\GitHub\CHAT-SUMMARIZER\Setup\Release Notes.txt
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
-PrivilegesRequiredOverridesAllowed=dialog
 OutputDir=C:\Users\Elmer\Documents\GitHub\CHAT-SUMMARIZER\Setup
-OutputBaseFilename=CAv1.4Setup
+OutputBaseFilename=10.0.10240
 SetupIconFile=C:\Users\Elmer\Documents\GitHub\CHAT-SUMMARIZER\dist\icon.ico
 Compression=lzma
 SolidCompression=yes
@@ -55,8 +54,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Source: "C:\Users\Elmer\Documents\GitHub\CHAT-SUMMARIZER\dist\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Elmer\Documents\GitHub\CHAT-SUMMARIZER\Setup\LICENSE.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Elmer\Documents\GitHub\CHAT-SUMMARIZER\Setup\README.txt"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Elmer\Documents\GitHub\CHAT-SUMMARIZER\Setup\Debug.txt"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Elmer\Documents\GitHub\CHAT-SUMMARIZER\*nltk_data"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\Elmer\Documents\GitHub\CHAT-SUMMARIZER\Setup\Release Notes.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Elmer\Documents\GitHub\CHAT-SUMMARIZER\nltk_data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Registry]

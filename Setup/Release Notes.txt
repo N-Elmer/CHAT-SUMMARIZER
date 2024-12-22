@@ -35,7 +35,7 @@ Installation
 1. Download the setup executable from the release section of this repository.
 2. Install the app via the setup.
 3. Run the executable of the app after the installation.
-4. Open the application in your browser at <http://localhost:8501>.
+4. Open the application in your browser at http://localhost:8501.
 
 Usage
 -------
