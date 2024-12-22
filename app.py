@@ -2,7 +2,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import re, string, os, pytz, json
+import re, string, os, sys, pytz, json, nltk, pyperclip
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -10,11 +10,140 @@ from gensim import corpora, models
 from datetime import datetime
 import matplotlib.pyplot as plt
 import seaborn as sns
+from pathlib import Path
 from gensim.models import LdaModel
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import (Table, TableStyle, Paragraph, Image, Spacer, SimpleDocTemplate, NextPageTemplate, PageBreak)
 from reportlab.lib import styles, enums, colors, pagesizes
+# nltk.download('punkt')
+# nltk.download('stopwords')
+
+# Set page configuration including favicon
+if getattr(sys, 'frozen', False):
+    # Running in a bundle
+    favicon_path = os.path.join(sys._MEIPASS, 'favicon.ico')
+else:
+    # Running in a normal Python environment
+    favicon_path = 'dist/favicon.ico'
+
+# Configure page
+st.set_page_config(
+    page_title="Chat Analyzer",
+    page_icon=favicon_path,
+    layout="wide",
+    initial_sidebar_state="expanded",
+    menu_items={
+        'Report a bug': None,
+        'About': None
+    }
+)
+
+# Force dark theme using custom CSS
+st.markdown("""
+    <style>
+        /* Override Streamlit's default theme */
+        :root {
+            --primary-color: #FF4B4B;
+            background-color: #0E1117;
+        }
+        
+        .stApp {
+            background-color: #0E1117;
+            color: #FAFAFA;
+        }
+        
+        .sidebar .sidebar-content {
+            background-color: #262730;
+        }
+        
+        /* Make dataframe fill width */
+        .stDataFrame {
+            width: 100% !important;
+        }
+        div[data-testid="stDataFrame"] > div {
+            width: 100% !important;
+        }
+        
+        /* Hide errors in production */
+        .stException, .stError {
+            display: none !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+# Hide Streamlit's default error messages in production
+if getattr(sys, 'frozen', False):
+    st.markdown("""
+        <style>
+            .stException, .stError {
+                display: none !important;
+            }
+            .stDataFrame {
+                width: 100% !important;
+            }
+            div[data-testid="stDataFrame"] > div {
+                width: 100% !important;
+            }
+        </style>
+    """, unsafe_allow_html=True)
+
+def copy_to_clipboard(text):
+    """Copy text to clipboard"""
+    pyperclip.copy(text)
+    st.session_state["copy_message"] = f"{text} Copied!"
+
+def display_network_urls():
+    """Display network URLs in the Streamlit interface"""
+    local_ip = os.environ.get('STREAMLIT_LOCAL_IP', 'localhost')
+    network_ip = os.environ.get('STREAMLIT_NETWORK_IP', 'localhost')
+    port = os.environ.get('STREAMLIT_SERVER_PORT', '8501')
+    
+    # Create a container for URLs
+    url_container = st.container()
+    
+    with url_container:
+        st.markdown("#### Network Access URLs")
+        cols = st.columns(2)
+        
+        with cols[0]:
+            local_url = f"http://{local_ip}:{port}"
+            st.markdown(f"**Local URL:**")
+            st.code(local_url)
+            if st.button("Copy Local URL"):
+                copy_to_clipboard(local_url)
+            
+        with cols[1]:
+            if network_ip != 'localhost':
+                network_url = f"http://{network_ip}:{port}"
+                st.markdown(f"**Network URL:**")
+                st.code(network_url)
+                if st.button("Copy Network URL"):
+                    copy_to_clipboard(network_url)
+            else:
+                st.markdown("**Network URL:**")
+                st.warning("Network access not available")
+
+        if "copy_message" in st.session_state:
+            st.success(st.session_state.pop("copy_message"))
+            
+        st.markdown("*Other devices on the same network can access the app using the Network URL.*")
+
+def save_terminal_setting(show_terminal):
+    """Save terminal visibility setting to a file"""
+    settings_file = os.path.join(os.path.expanduser('~'), '.chat_analyzer_settings.json')
+    settings = {"show_terminal": show_terminal}
+    with open(settings_file, 'w') as f:
+        json.dump(settings, f)
+
+def load_terminal_setting():
+    """Load terminal visibility setting from file"""
+    settings_file = os.path.join(os.path.expanduser('~'), '.chat_analyzer_settings.json')
+    if os.path.exists(settings_file):
+        with open(settings_file, 'r') as f:
+            settings = json.load(f)
+            return settings.get("show_terminal", False)
+    return False
 
 # Function Definitions
 def save_lda_checkpoint(lda_model, dictionary, checkpoint_dir="Model", checkpoint_name="lda_checkpoint"):
@@ -289,9 +418,24 @@ def generate_summary(chat_df, top_n_keywords=10, top_n_messages=5, num_topics=3)
     return keywords_dict, summary, topics
 
 # Streamlit App Structure
-st.title("Chat Analyzer")
-st.sidebar.header("Upload Chat")
+st.markdown(
+    """
+    <style>
+    .center-title {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    </style>
+    <div class="center-title">CHAT ANALYZER</div>
+    """,
+    unsafe_allow_html=True
+)
 
+display_network_urls()
+st.sidebar.header("Upload Chat")
 uploaded_file = st.sidebar.file_uploader("Upload A Chat File", type=["txt", "json"])
 
 if uploaded_file:
@@ -305,7 +449,8 @@ if uploaded_file:
     else:
         chat_df = parse_chat(uploaded_file.read())
 
-    st.write("### Raw Chat Data", chat_df)
+    st.write("### Raw Chat Data")
+    st.dataframe(chat_df, use_container_width=True)
 
     with st.spinner("Processing Chat Data..."):
         chat_df = preprocess_chat(chat_df)
@@ -377,3 +522,10 @@ if uploaded_file:
             # Provide Download Option
             with open(pdf_path, "rb") as pdf_file:
                 st.download_button("Download Report", pdf_file, file_name="Chat Report.pdf", mime="application/pdf")
+
+# Add terminal visibility control with persistence
+show_terminal = st.sidebar.checkbox("Show Terminal", value=load_terminal_setting())
+if show_terminal != load_terminal_setting():
+    save_terminal_setting(show_terminal)
+    if getattr(sys, 'frozen', False):
+        st.rerun()

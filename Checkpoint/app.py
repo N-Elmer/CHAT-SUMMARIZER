@@ -2,7 +2,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-import re, string, os, pytz, json
+import re, string, os, sys, pytz, json, nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -15,6 +15,8 @@ from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import (Table, TableStyle, Paragraph, Image, Spacer, SimpleDocTemplate, NextPageTemplate, PageBreak)
 from reportlab.lib import styles, enums, colors, pagesizes
+nltk.download('punkt')
+nltk.download('stopwords')
 
 # Function Definitions
 def save_lda_checkpoint(lda_model, dictionary, checkpoint_dir="Model", checkpoint_name="lda_checkpoint"):
@@ -291,6 +293,12 @@ def generate_summary(chat_df, top_n_keywords=10, top_n_messages=5, num_topics=3)
 # Streamlit App Structure
 st.title("Chat Analyzer")
 st.sidebar.header("Upload Chat")
+
+# Add terminal visibility control
+show_terminal = st.sidebar.checkbox("Show Terminal", value=False)
+if show_terminal:
+    import subprocess
+    subprocess.Popen(['cmd.exe', '/k', 'echo Terminal Enabled'])
 
 uploaded_file = st.sidebar.file_uploader("Upload A Chat File", type=["txt", "json"])
 

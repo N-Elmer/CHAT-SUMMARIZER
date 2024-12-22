@@ -49,8 +49,24 @@ CHAT SUMMARIZER/
 ### Prerequisites
 - Python 3.8 or later.
 - pip (Python package manager).
+- Windows 10/11.
+- Web Browser.
 
 ### Installation
+
+#### With Windows Executable
+
+1. Download the setup executable from release section of this repository.
+
+2. Install the app via the setup.
+
+3. Run the executable of the app, after the app is installed.
+
+4. Open the application in your browser at [http://localhost:8501](http://localhost:8501).
+
+5. If the PC running the web app is connected to a router, you can use your mobile device to launch the app by opening your mobile browser and launching the "Network URL :" given in the terminal. This will automatically use your PC as a server and your phone as a client. You can do this with as many other PCs and mobile devices as the PC running the app can support.
+
+#### With Python
 
 1. Clone this repository:
    ```bash

@@ -1,0 +1,21 @@
+# Streamlit config.toml file:
+
+[theme]
+base = "dark"
+
+[server]
+headless = true
+runOnSave = true
+enableCORS = false
+enableXsrfProtection = false
+port = 8501
+
+[global]
+developmentMode = false
+
+[browser]
+gatherUsageStats = false
+
+[client]
+toolbarMode = "minimal"
+showErrorDetails = false
