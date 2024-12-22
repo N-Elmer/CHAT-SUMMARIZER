@@ -1,0 +1,59 @@
+Release Notes v1.4 📝
+=======================
+
+New Features
+--------------
+
+- Chat Parsing: Extracts structured data (date, time, sender, and messages) from raw chat text files.
+- Preprocessing: Cleans and preprocesses messages to remove stopwords, punctuation, and irrelevant information.
+- Filtering: Apply date, time, and keyword-based filters to refine the chat data for analysis.
+- Keyword Extraction: Identifies and ranks the most significant keywords in the chat.
+- Topic Modeling: Uses Latent Dirichlet Allocation (LDA) to identify key topics of conversation.
+- Visualizations: Interactive charts for message trends, topic distributions, and keyword importance.
+- PDF Report Generation: Exports the analysis results, including charts and message summaries, into a structured PDF report.
+
+Improvements
+--------------
+
+- Enhanced user interface with a dark theme for better readability.
+- Improved performance for large chat files.
+- Added support for both `.txt` and `.json` chat file formats.
+- Streamlined the process of generating and downloading PDF reports.
+
+Bug Fixes
+-----------
+
+- WhatsApp Chat Support.
+- Telegram Chat Support.
+- Model Checkpoint Support.
+- Fixed Table Dimension Bug.
+- First Windows Standalone.
+
+Installation
+--------------
+
+1. Download the setup executable from the release section of this repository.
+2. Install the app via the setup.
+3. Run the executable of the app after the installation.
+4. Open the application in your browser at <http://localhost:8501>.
+
+Usage
+-------
+
+1. Upload your exported chat file using the sidebar.
+2. Apply filters for date, time, and keywords to refine the chat data.
+3. Generate visualizations and summaries.
+4. Download the PDF report summarizing the analysis.
+
+Troubleshooting
+-----------------
+
+- File Upload Issues: Ensure the chat file is in `.txt` or `.json` format and properly structured.
+- Date/Time Errors: Verify that the date and time formats in the file match `DD/MM/YYYY` and `HH:MM AM/PM`.
+- PDF Generation Problems: Ensure that the Report directory exists and is writable.
+- Missing Dependencies: Reinstall required packages using `pip install -r requirements.txt`.
+
+Contributing
+--------------
+
+Contributions are welcome! If you find a bug or have a feature request, please open an issue in the GitHub repository.
