@@ -19,6 +19,9 @@ from reportlab.lib import styles, enums, colors, pagesizes
 # nltk.download('punkt')
 # nltk.download('stopwords')
 
+# TO DO
+# If internet present, check for updates
+
 # Set page configuration including favicon
 if getattr(sys, 'frozen', False):
     # Running in a bundle

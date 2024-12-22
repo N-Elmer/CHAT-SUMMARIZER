@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Chat Analyzer"
-#define MyAppVersion "1.3"
+#define MyAppVersion "1.4"
 #define MyAppPublisher "N-Elmer"
 #define MyAppURL "https://github.com/N-Elmer/CHAT-SUMMARIZER/"
 #define MyAppExeName "Chat Analyser.exe"
@@ -39,7 +39,7 @@ InfoAfterFile=C:\Users\Elmer\Documents\GitHub\CHAT-SUMMARIZER\Setup\Debug.txt
 ;PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
 OutputDir=C:\Users\Elmer\Documents\GitHub\CHAT-SUMMARIZER\Setup
-OutputBaseFilename=CAv1.3Setup
+OutputBaseFilename=CAv1.4Setup
 SetupIconFile=C:\Users\Elmer\Documents\GitHub\CHAT-SUMMARIZER\dist\icon.ico
 Compression=lzma
 SolidCompression=yes
