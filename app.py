@@ -16,11 +16,18 @@ from reportlab.lib.pagesizes import letter
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import (Table, TableStyle, Paragraph, Image, Spacer, SimpleDocTemplate, NextPageTemplate, PageBreak)
 from reportlab.lib import styles, enums, colors, pagesizes
-# nltk.download('punkt')
-# nltk.download('stopwords')
 
 # TO DO
-# If internet present, check for updates
+# Add button to clear model cache from front-end to enable pie chart regeneration.
+# If internet is present, check for updates then show button to update.
+# Show/hide terminal button only on local url, not network url.
+# Update github project structure in readme.
+# Add button to close app from frontend when terminal is set to hidden.
+# Add new languages like french, spanish etc to app.
+# Make mobile version of app.
+# Make linux version of app.
+# make code object oriented.
+# Regenerate pipreqs file.
 
 # Set page configuration including favicon
 if getattr(sys, 'frozen', False):

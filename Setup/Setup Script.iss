@@ -55,7 +55,7 @@ Source: "C:\Users\Elmer\Documents\GitHub\CHAT-SUMMARIZER\dist\{#MyAppExeName}"; 
 Source: "C:\Users\Elmer\Documents\GitHub\CHAT-SUMMARIZER\Setup\LICENSE.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Elmer\Documents\GitHub\CHAT-SUMMARIZER\Setup\README.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\Elmer\Documents\GitHub\CHAT-SUMMARIZER\Setup\Release Notes.txt"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\Elmer\Documents\GitHub\CHAT-SUMMARIZER\nltk_data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+; Source: "C:\Users\Elmer\Documents\GitHub\CHAT-SUMMARIZER\nltk_data\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Registry]
